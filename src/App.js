@@ -3,7 +3,6 @@ import { Board}  from './Board.js';
 import { useState } from 'react';
 import { Button } from './Button';
 
-const DEFAULT_NUM =6
 
 const random =(n)=>{
   return Math.floor(Math.random() * n)+1
