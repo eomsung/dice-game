@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import './App.css';
+import { Board}  from './Board.js';
+import { useState } from 'react';
 import { Button } from './Button';
-import { Dice } from './Dice';
 
 const DEFAULT_NUM =6
 
@@ -10,28 +10,36 @@ const random =(n)=>{
 }
 
 function App() {
-  const [num, setNum] = useState(DEFAULT_NUM)
-  const [gameHistory, setGameHistory] = useState([])
+  const [myGameHistory, setMyGameHistory] = useState([])
+  const [yourGameHistory, setYourGameHistory] = useState([])
+  
   const handleRollClick = () => {
-    const random_num = random(6)
-    setNum(random_num)
-    gameHistory.push(random_num)
-    setGameHistory([...gameHistory])
-  }
-  const handleResetClick =() =>{
-    setNum(DEFAULT_NUM);
-    setGameHistory([])
-  }
+    const randomNum = random(6)
+    setMyGameHistory([...myGameHistory,randomNum])
 
+    const randomYourNum =random(6)
+    setYourGameHistory([...yourGameHistory,randomYourNum])
+}
+  const handleResetClick =() =>{
+      setMyGameHistory([])
+      setYourGameHistory([])
+  }
+  
   return (
-    <>
-          <Dice color="blue" num={num}/>
-          <Button onClick={handleRollClick}>던지기</Button>
-          <Button onClick={handleResetClick}>처음부터</Button>
-          <div>
-            {gameHistory.join(',')}
-          </div>
-    </>
+    <div>
+      <Board
+        color ="blue" 
+        name ="나" 
+        history = {myGameHistory}
+      />
+      <Board 
+        color ="red" 
+        name ="너" 
+        history = {yourGameHistory}
+      />
+      <Button onClick={handleRollClick}>던지기</Button>
+      <Button onClick={handleResetClick}>처음부터</Button>
+    </div>
   );
 }
 

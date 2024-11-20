@@ -1,8 +1,10 @@
-export function Button(props){
+import './Button.css'
 
+export function Button(props){
     return(
-        <button onClick={props.onClick}>
+        <button className='Button' onClick={props.onClick}>
             {props.children}
-            </button>
+        </button>
     )
 }
+
